@@ -2,32 +2,20 @@
 
 ## Dev
 
-### Backend
-
-Requires a Python 3.11 environment.
+### Docker
 
 ```bash
-cd backend
-pip install -r requirements.txt
-fastapi run
+docker-compose up
 ```
 
-Server runs on http://0.0.0.0:8000
+View the frontend at http://localhost:3000
+
+Backend will run at http://localhost:8000
 
 ```bash
 curl http://localhost:8000/health
+curl http://localhost:8000/cases
 ```
-
-### Frontend
-
-```bash
-cd frontend
-npm install
-npm run build
-npm run start
-```
-
-Frontend runs on http://localhost:3000
 
 ### OpenAPI
 
@@ -43,6 +31,16 @@ make gen-openapi
 ### Database
 
 Backend serialises the cases to a sqlite DB.
+
+## What I would have done differently
+
+- [ ] Tests!
+  - [ ] Pytest
+  - [ ] Playwright browser tests
+  - [ ] Jest component tests
+- [ ] Use a component framework, e.g. ShadCN
+- [ ] Real file upload, using object storage
+- [ ] Prepare the environments, e.g. using env specific config
 
 ## Instructions
 
