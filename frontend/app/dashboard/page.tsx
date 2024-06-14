@@ -5,6 +5,7 @@ import GuidelinesUpload from "@/components/guidelines-upload";
 import MedicalRecordUpload from "@/components/medical-record-upload";
 import { WorkflowStage, useDashboard } from "@/context/dashboard-context";
 import { Toaster } from "@/context/toaster";
+import classNames from "classnames";
 import { useRouter } from "next/navigation";
 
 export const revalidate = 0;
@@ -32,12 +33,14 @@ export default function DashboardRoot() {
                     {showGuidelinesUpload && <GuidelinesUpload />}
                 </div>
 
-                <div className="w-full py-4 flex flex-row justify-center h-28">
-                    {showContinue && (
-                        <Button variant="green" className="h-fit" onClick={handleContinue}>
-                            Continue
-                        </Button>
-                    )}
+                <div className="w-full py-4 flex flex-row items-center justify-center h-28">
+                    <Button
+                        variant={showContinue ? "green" : "grey"}
+                        disabled={!showContinue}
+                        className={classNames("h-fit", showContinue ? "" : "opacity-60")}
+                        onClick={handleContinue}>
+                        Continue
+                    </Button>
                 </div>
             </div>
         </div>

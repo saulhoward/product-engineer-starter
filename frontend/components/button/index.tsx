@@ -7,13 +7,14 @@ const buttonStyles = {
     blue: "text-white bg-blue-500 border-blue-500",
     orange: "text-white bg-orange-500 border-orange-500",
     green: "text-white bg-green-600 border-green-600",
+    grey: "text-white bg-slate-500 border-slate-500",
     success: "text-green-600 bg-white border-transparent flex gap-2 align-center justify-center"
 };
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     isLoading?: boolean;
     isSuccess?: boolean;
-    variant?: "blue" | "orange" | "green";
+    variant?: "blue" | "orange" | "green" | "grey";
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -21,16 +22,25 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         { className, isLoading = false, isSuccess = false, variant = "blue", children, ...props },
         ref
     ) => {
-        const variantStyle = isSuccess
-            ? buttonStyles.success
-            : variant === "orange"
-              ? buttonStyles.orange
-              : variant === "blue"
-                ? buttonStyles.blue
-                : variant === "green"
-                  ? buttonStyles.green
-                  : buttonStyles.blue;
-
+        let variantStyle = "";
+        if (isSuccess) {
+            variantStyle = buttonStyles.success;
+        } else {
+            switch (variant) {
+                case "orange":
+                    variantStyle = buttonStyles.orange;
+                    break;
+                case "green":
+                    variantStyle = buttonStyles.green;
+                    break;
+                case "grey":
+                    variantStyle = buttonStyles.grey;
+                    break;
+                case "blue":
+                default:
+                    variantStyle = buttonStyles.blue;
+            }
+        }
         return (
             <button
                 className={classNames(

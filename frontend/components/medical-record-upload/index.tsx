@@ -25,7 +25,10 @@ export default function MedicalRecordUpload() {
                 type: "setMedicalRecord",
                 file: { url: "/assets/medical-record.pdf" }
             });
-            toast({ title: "Success", description: "Uploaded medical record file" });
+            toast({
+                title: "Successfully uploaded medical record",
+                description: "Next, please upload the guidelines file."
+            });
         },
         isUploading ? mockUploadDelay : null
     );

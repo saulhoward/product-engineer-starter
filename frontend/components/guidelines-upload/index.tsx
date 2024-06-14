@@ -22,7 +22,10 @@ export default function GuidelinesUpload() {
         () => {
             setIsUploading(false);
             dispatch({ type: "setGuidelinesFile", file: { url: "/assets/guidelines.pdf" } });
-            toast({ title: "Success", description: "Uploaded guidelines file" });
+            toast({
+                title: "Successfully uploaded guidelines",
+                description: "Thank you! Now, please click the Continue button."
+            });
         },
         isUploading ? mockUploadDelay : null
     );
