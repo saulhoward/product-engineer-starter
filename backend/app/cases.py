@@ -8,7 +8,7 @@ from pydantic.json import pydantic_encoder
 
 from .database import engine, CaseDB, Status, case_from_db
 from .models import Case, Step, Option, Evidence
-from .mock import MOCK_STEP, MOCK_SUMMARY
+from .mock import MOCK_STEPS, MOCK_SUMMARY
 
 
 async def create_case() -> Case:
@@ -27,9 +27,11 @@ async def create_case() -> Case:
     return case_from_db(new_case)
 
 
-async def get_case(id: str) -> Case:
+async def get_case(id: str) -> Case | None:
     with Session(engine) as session:
         case_db = session.get(CaseDB, id)
+        if not case_db:
+            return None
         return case_from_db(case_db)
 
 
@@ -52,9 +54,7 @@ def update_steps(case_id: str):
         case = session.get(CaseDB, case_id)
         case.status = Status.completed
         case.summary = MOCK_SUMMARY.strip()
-        case_steps = [
-            MOCK_STEP,
-        ]
+        case_steps = MOCK_STEPS
         steps_json = json.dumps(case_steps, default=pydantic_encoder)
         case.steps_json = steps_json
         session.add(case)

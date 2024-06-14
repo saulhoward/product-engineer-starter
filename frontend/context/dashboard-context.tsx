@@ -24,6 +24,7 @@ const INITIAL_STATE: IDashboardContext = {
 };
 
 export type DashboardAction =
+    | { type: "resetFiles" }
     | { type: "setMedicalRecord"; file: IUploadedFile }
     | { type: "setGuidelinesFile"; file: IUploadedFile };
 
@@ -49,6 +50,8 @@ function reducer(state: IDashboardContext, action: DashboardAction): IDashboardC
                     ...state,
                     guidelinesFile: action.file
                 };
+            case "resetFiles":
+                return INITIAL_STATE;
         }
     };
     const newState = next();

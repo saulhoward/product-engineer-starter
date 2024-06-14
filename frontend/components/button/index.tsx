@@ -8,13 +8,14 @@ const buttonStyles = {
     orange: "text-white bg-orange-500 border-orange-500",
     green: "text-white bg-green-600 border-green-600",
     grey: "text-white bg-slate-500 border-slate-500",
+    ghost: "text-slate-500 bg-white border-transparent",
     success: "text-green-600 bg-white border-transparent flex gap-2 align-center justify-center"
 };
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     isLoading?: boolean;
     isSuccess?: boolean;
-    variant?: "blue" | "orange" | "green" | "grey";
+    variant?: "blue" | "orange" | "green" | "grey" | "ghost";
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -35,6 +36,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                     break;
                 case "grey":
                     variantStyle = buttonStyles.grey;
+                    break;
+                case "ghost":
+                    variantStyle = buttonStyles.ghost;
                     break;
                 case "blue":
                 default:
