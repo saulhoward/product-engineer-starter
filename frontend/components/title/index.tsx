@@ -8,8 +8,7 @@ export function Title({ isLoading, title }: { isLoading?: boolean; title?: strin
     };
     return (
         <div className="p-4 px-8 text-lg inline-flex justify-center items-center">
-            {isLoading && <FaSpinner className="h-4 w-4 animate-spin" />}
-            <div className="flex gap-4">
+            <div className="flex gap-4 items-center">
                 <button className="h-6 w-6" onClick={onClickLogo}>
                     <svg
                         height="100%"
@@ -33,6 +32,7 @@ export function Title({ isLoading, title }: { isLoading?: boolean; title?: strin
                         </defs>
                     </svg>
                 </button>
+                {isLoading && <FaSpinner className="h-4 w-4 animate-spin" />}
                 {title && <div>{title}</div>}
             </div>
         </div>

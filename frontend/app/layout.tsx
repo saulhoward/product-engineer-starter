@@ -10,7 +10,9 @@ export default function RootLayout(props: IRootLayoutProps) {
 
     return (
         <html lang="en">
-            <head></head>
+            <head>
+                <title>Anterior Dashboard</title>
+            </head>
             <body>
                 {children}
                 <div id="modal" />

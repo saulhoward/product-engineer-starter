@@ -19,11 +19,17 @@ MOCK_STEPS = [
         is_final=False,
         evidence=[
             Evidence(
+                content="Plan: MBB: Suggest trying Medial Branch Block (MBB) to pinpoint pain-causing nerves. This procedure involves an anesthetic injection near key nerves. Risks will be explained.",
+                page_number=5,
+                pdf_name="medical-record.pdf",
+                event_datetime="2023-04-21T00:00:00",
+            ),
+            Evidence(
                 content="Assessment: Chronic lower back pain, possibly related to facet joint pathology, unresponsive to conservative treatment.",
                 page_number=4,
                 pdf_name="medical-record.pdf",
                 event_datetime="2023-04-21T00:00:00",
-            )
+            ),
         ],
     ),
     Step(
@@ -40,11 +46,17 @@ MOCK_STEPS = [
         is_final=False,
         evidence=[
             Evidence(
+                content="Plan: MBB: Suggest trying Medial Branch Block (MBB) to pinpoint pain-causing nerves. This procedure involves an anesthetic injection near key nerves. Risks will be explained.",
+                page_number=5,
+                pdf_name="medical-record.pdf",
+                event_datetime="2023-04-21T00:00:00",
+            ),
+            Evidence(
                 content="Assessment: Chronic lower back pain, possibly related to facet joint pathology, unresponsive to conservative treatment.",
                 page_number=4,
                 pdf_name="medical-record.pdf",
                 event_datetime="2023-04-21T00:00:00",
-            )
+            ),
         ],
     ),
     Step(
@@ -61,11 +73,17 @@ MOCK_STEPS = [
         is_final=False,
         evidence=[
             Evidence(
+                content="Plan: MBB: Suggest trying Medial Branch Block (MBB) to pinpoint pain-causing nerves. This procedure involves an anesthetic injection near key nerves. Risks will be explained.",
+                page_number=5,
+                pdf_name="medical-record.pdf",
+                event_datetime="2023-04-21T00:00:00",
+            ),
+            Evidence(
                 content="Assessment: Chronic lower back pain, possibly related to facet joint pathology, unresponsive to conservative treatment.",
                 page_number=4,
                 pdf_name="medical-record.pdf",
                 event_datetime="2023-04-21T00:00:00",
-            )
+            ),
         ],
     ),
 ]
