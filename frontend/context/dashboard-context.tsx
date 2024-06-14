@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useReducer, ReactNode, Dispatch } from "react";
 
 interface IUploadedFile {
     url: string;
@@ -7,32 +7,75 @@ interface IUploadedFile {
 
 interface IDashboardContext {
     medicalRecord: IUploadedFile | null;
-    setMedicalRecord: (file: IUploadedFile | null) => void;
     guidelinesFile: IUploadedFile | null;
-    setGuidelinesFile: (file: IUploadedFile | null) => void;
+    workflowStage: WorkflowStage;
+}
+
+export enum WorkflowStage {
+    INITIAL = "INITIAL",
+    MEDICAL_RECORD = "MEDICAL_RECORD",
+    MEDICAL_RECORD_AND_GUIDELINES = "MEDICAL_RECORD_AND_GUIDELINES"
 }
 
 const INITIAL_STATE: IDashboardContext = {
     medicalRecord: null,
-    setMedicalRecord: () => {},
     guidelinesFile: null,
-    setGuidelinesFile: () => {}
+    workflowStage: WorkflowStage.INITIAL
 };
 
-export const DashboardContext = createContext(INITIAL_STATE);
+export type DashboardAction =
+    | { type: "setMedicalRecord"; file: IUploadedFile }
+    | { type: "setGuidelinesFile"; file: IUploadedFile };
 
-export function DashboardProvider({ children }: { children: ReactNode }) { 
-    const [medicalRecord, setMedicalRecord] = useState<IUploadedFile | null>(null);
-    const [guidelinesFile, setGuidelinesFile] = useState<IUploadedFile | null>(null);
+function setWorkflowStage(state: IDashboardContext): WorkflowStage {
+    if (state.medicalRecord !== null && state.guidelinesFile !== null) {
+        return WorkflowStage.MEDICAL_RECORD_AND_GUIDELINES;
+    } else if (state.medicalRecord !== null && state.guidelinesFile === null) {
+        return WorkflowStage.MEDICAL_RECORD;
+    }
+    return WorkflowStage.INITIAL;
+}
 
-    const value = { medicalRecord, setMedicalRecord, guidelinesFile, setGuidelinesFile }; 
+function reducer(state: IDashboardContext, action: DashboardAction): IDashboardContext {
+    const next = () => {
+        switch (action.type) {
+            case "setMedicalRecord":
+                return {
+                    ...state,
+                    medicalRecord: action.file
+                };
+            case "setGuidelinesFile":
+                return {
+                    ...state,
+                    guidelinesFile: action.file
+                };
+        }
+    };
+    const newState = next();
+    newState.workflowStage = setWorkflowStage(newState);
+    return newState;
+}
 
+const DashboardContext = createContext<IDashboardContext>(INITIAL_STATE);
+
+const DashboardDispatchContext = createContext<Dispatch<DashboardAction>>(() => {});
+
+export function DashboardProvider({ children }: { children: ReactNode }) {
+    const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
     return (
-        <DashboardContext.Provider value={value}>{children}</DashboardContext.Provider>
+        <DashboardContext.Provider value={state}>
+            <DashboardDispatchContext.Provider value={dispatch}>
+                {children}
+            </DashboardDispatchContext.Provider>
+        </DashboardContext.Provider>
     );
 }
 
-export function useDashboard() { 
+export function useDashboard() {
     const context = useContext(DashboardContext);
     return context;
+}
+
+export function useDashboardDispatch() {
+    return useContext(DashboardDispatchContext);
 }
