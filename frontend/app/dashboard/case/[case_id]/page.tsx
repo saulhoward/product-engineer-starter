@@ -2,7 +2,7 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { useGetCaseByIdCasesCaseIdGet } from "@/api/default/default";
-import { Case, Status, Step } from "@/api/api.schemas";
+import { Case, Status } from "@/api/api.schemas";
 import { FaAngleDoubleDown, FaSpinner } from "react-icons/fa";
 import { IoSparkles } from "react-icons/io5";
 import { Separator } from "@/components/separator";
@@ -152,11 +152,7 @@ function Summary({ isLoading, cse }: { isLoading: boolean; cse?: Case }) {
 }
 
 function Skeleton({ className }: { className?: string }) {
-    return (
-        <div
-            className={classNames("h-6 w-full bg-slate-300 rounded-xl animate-pulse", className)}
-        />
-    );
+    return <div className={classNames("h-6 bg-slate-300 rounded-xl animate-pulse", className)} />;
 }
 
 function Timestamp({ isLoading, cse }: { isLoading: boolean; cse?: Case }) {
