@@ -47,3 +47,8 @@ next-env.d.ts
 .nvmrc
 
 .vscode
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+node_modules
