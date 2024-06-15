@@ -12,6 +12,8 @@ import { Button } from "@/components/button";
 import { Title } from "@/components/title";
 import classNames from "classnames";
 import { prettyDate } from "@/utils/date";
+import anteriorLogo from "@/public/icon.svg";
+import Image from "next/image";
 
 export default function CaseResult() {
     const params = useParams<{ case_id: string }>();
@@ -61,6 +63,15 @@ export default function CaseResult() {
                     <div className="flex">
                         <Separator orientation="vertical" />
                         <div className="p-16 pt-8 h-full w-full">
+                            {!isCompleted && (
+                                <div className="w-full h-full flex justify-center items-center animate-pulse">
+                                    <Image
+                                        src={anteriorLogo}
+                                        alt="Anterior logo"
+                                        className="h-56 w-56 opacity-50"
+                                    />
+                                </div>
+                            )}
                             {isCompleted && (
                                 <>
                                     {cse && <FinalDetermination isMet={cse.is_met} />}
@@ -181,7 +192,7 @@ function Steps({
             <div>
                 {isLoading && <FaSpinner className="h-4 w-4 animate-spin" />}
                 {cse && (
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-3">
                         {cse.steps.map((s, i) => (
                             <StepItem
                                 key={i}
@@ -201,7 +212,7 @@ function FinalDetermination({ isMet }: { isMet: boolean }) {
     const str = isMet ? "Case is met" : "Case is not met";
     return (
         <div className="flex gap-4 pb-6">
-            <TickCross isTick={isMet} />
+            <TickCross isTick={isMet} size="lg" />
             <div className="text-lg text-slate-500">{str}</div>
         </div>
     );

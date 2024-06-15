@@ -30,9 +30,7 @@ async def create_case() -> Case:
 async def get_case(id: str) -> Case | None:
     with Session(engine) as session:
         case_db = session.get(CaseDB, id)
-        if not case_db:
-            return None
-        return case_from_db(case_db)
+        return case_from_db(case_db) if case_db else None
 
 
 async def get_cases() -> List[Case]:

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { FaSpinner, FaCheck } from "react-icons/fa";
 import classNames from "classnames";
+import { PiUploadSimpleBold } from "react-icons/pi";
 
 const buttonStyles = {
     base: "inline-flex items-center justify-center py-2 px-4 rounded border-2 font-medium transition-colors",
@@ -15,12 +16,21 @@ const buttonStyles = {
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     isLoading?: boolean;
     isSuccess?: boolean;
+    isFileUpload?: boolean;
     variant?: "blue" | "orange" | "green" | "grey" | "ghost";
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     (
-        { className, isLoading = false, isSuccess = false, variant = "blue", children, ...props },
+        {
+            className,
+            isLoading = false,
+            isSuccess = false,
+            isFileUpload = false,
+            variant = "blue",
+            children,
+            ...props
+        },
         ref
     ) => {
         let variantStyle = "";
@@ -47,12 +57,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         }
         return (
             <button
-                className={classNames(
-                    buttonStyles.base,
-                    variantStyle,
-                    isLoading ? "flex gap-2" : "",
-                    className
-                )}
+                className={classNames(buttonStyles.base, variantStyle, "flex gap-2", className)}
                 ref={ref}
                 {...props}>
                 {isLoading && (
@@ -67,7 +72,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                         <div>{children}</div>
                     </>
                 )}
-                {!isLoading && !isSuccess && children}
+                {!isLoading && !isSuccess && isFileUpload && (
+                    <>
+                        <PiUploadSimpleBold className="h-4 w-4" />
+                        <div>{children}</div>
+                    </>
+                )}
+                {!isLoading && !isSuccess && !isFileUpload && children}
             </button>
         );
     }

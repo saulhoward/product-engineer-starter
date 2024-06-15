@@ -12,6 +12,7 @@ export default function RootLayout(props: IRootLayoutProps) {
         <html lang="en">
             <head>
                 <title>Anterior Dashboard</title>
+                <link rel="icon" href="/icon.svg" type="image/svg+xml" sizes="any"></link>
             </head>
             <body>
                 {children}

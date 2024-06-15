@@ -1,4 +1,4 @@
-import { Step } from "@/api/api.schemas";
+import { Option, Step } from "@/api/api.schemas";
 import { Separator } from "@/components/separator";
 import { prettyDate } from "@/utils/date";
 import classNames from "classnames";
@@ -14,15 +14,34 @@ export function StepItem({
     onClick: () => void;
 }) {
     return (
-        <button
-            onClick={onClick}
+        <div>
+            <button
+                onClick={onClick}
+                className={classNames(
+                    "flex w-full space-x-2 items-center rounded-full p-2 transition-colors",
+                    isSelected ? "bg-blue-100" : "hover:bg-blue-100/50"
+                )}>
+                <TickCross isTick={step.is_met} />
+                <div className="text-left">{step.question}</div>
+            </button>
+            <div className="ml-8 flex flex-col space-y-2">
+                {step.options.map((o, i) => (
+                    <OptionComponent key={i} option={o} />
+                ))}
+            </div>
+        </div>
+    );
+}
+
+function OptionComponent({ option }: { option: Option }) {
+    return (
+        <div
             className={classNames(
-                "flex space-x-4 items-center rounded-full p-2",
-                isSelected ? "bg-blue-100" : "hover:bg-blue-100/50"
+                "flex space-x-2 items-center rounded-full p-2 transition-colors"
             )}>
-            <TickCross isTick={step.is_met} />
-            <div className="text-left">{step.question}</div>
-        </button>
+            <TickCross isTick={option.selected} />
+            <div className="text-left">{option.text}</div>
+        </div>
     );
 }
 
@@ -31,24 +50,19 @@ export function TickCross({
     size = "default"
 }: {
     isTick: boolean;
-    size?: "sm" | "default";
+    size?: "sm" | "default" | "lg";
 }) {
+    const iconCls = size === "sm" ? "h-4 w-4" : size === "lg" ? "h-10 w-10" : "h-6 w-6";
     return (
         <div>
             {isTick && (
                 <FaCheckCircle
-                    className={classNames(
-                        "text-green-600 bg-white rounded-full",
-                        size === "sm" ? "h-4 w-4" : "h-8 w-8"
-                    )}
+                    className={classNames("text-green-600 bg-white rounded-full", iconCls)}
                 />
             )}
             {!isTick && (
                 <FaMinusCircle
-                    className={classNames(
-                        "text-slate-400 bg-white rounded-full",
-                        size === "sm" ? "h-4 w-4" : "h-8 w-8"
-                    )}
+                    className={classNames("text-slate-400 bg-white rounded-full", iconCls)}
                 />
             )}
         </div>

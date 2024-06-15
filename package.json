@@ -1,0 +1,14 @@
+{
+  "name": "product-engineer-starter",
+  "version": "1.0.0",
+  "description": "## Dev",
+  "main": "index.js",
+  "devDependencies": {
+    "@playwright/test": "^1.44.1",
+    "@types/node": "^20.14.2"
+  },
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

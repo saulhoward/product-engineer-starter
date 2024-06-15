@@ -5,6 +5,7 @@ import { useDashboard, useDashboardDispatch } from "@/context/dashboard-context"
 import { Button } from "@/components/button";
 import { useInterval } from "usehooks-ts";
 import { useToast } from "@/context/use-toast";
+import { PiUploadSimple, PiUploadSimpleBold } from "react-icons/pi";
 
 const mockUploadDelay = 3000;
 
@@ -47,6 +48,7 @@ export default function MedicalRecordUpload() {
                 isLoading={isUploading}
                 isSuccess={isSuccess}
                 disabled={disabled}
+                isFileUpload={true}
                 variant="blue">
                 {!isSuccess && <span>Simulate Medical Record Upload</span>}
                 {isSuccess && <span>Medical Record Uploaded</span>}

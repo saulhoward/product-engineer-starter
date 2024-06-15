@@ -43,6 +43,7 @@ export default function GuidelinesUpload() {
                 onClick={handleClick}
                 isLoading={isUploading}
                 isSuccess={isSuccess}
+                isFileUpload={true}
                 disabled={disabled}
                 variant="orange">
                 {!isSuccess && <span>Simulate Guidelines Upload</span>}

@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation";
 import { FaSpinner } from "react-icons/fa";
+import { TbSlashes } from "react-icons/tb";
 
 export function Title({ isLoading, title }: { isLoading?: boolean; title?: string }) {
     const router = useRouter();
@@ -33,7 +34,15 @@ export function Title({ isLoading, title }: { isLoading?: boolean; title?: strin
                     </svg>
                 </button>
                 {isLoading && <FaSpinner className="h-4 w-4 animate-spin" />}
-                {title && <div>{title}</div>}
+                <div className="flex space-x-2 items-center">
+                    <button onClick={onClickLogo}>Anterior</button>
+                    {title && (
+                        <div className="flex space-x-2 items-center">
+                            <TbSlashes className="h-5 w-5 text-slate-500" />
+                            <div className="text-slate-600">{title}</div>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );
