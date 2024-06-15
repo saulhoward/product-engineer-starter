@@ -28,6 +28,15 @@ After changes to the backend API, re-generate the TypeScript API:
 make gen-openapi
 ```
 
+### Tests
+
+Playwright is used for E2E testing.
+
+```bash
+cd tests
+npx playwright test
+```
+
 ### Database
 
 Backend serialises the cases to a sqlite DB.
