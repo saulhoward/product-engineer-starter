@@ -36,7 +36,7 @@ Backend serialises the cases to a sqlite DB.
 
 - [ ] Tests!
   - [ ] Pytest
-  - [ ] Playwright browser tests
+  - [x] Playwright browser tests
   - [ ] Jest component tests
 - [ ] Use a component framework, e.g. ShadCN
 - [ ] Real file upload, using object storage
