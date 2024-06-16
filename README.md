@@ -34,6 +34,7 @@ Playwright is used for E2E testing.
 
 ```bash
 cd tests
+npx playwright install
 npx playwright test
 ```
 
